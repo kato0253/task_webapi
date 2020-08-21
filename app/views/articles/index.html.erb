@@ -3,11 +3,12 @@
 <%= link_to "ユーザー情報編集", edit_user_registration_path %>
 <%= link_to '投稿', new_article_path %>
 <%= link_to "管理者画面", rails_admin_path %>
+<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
 <% elsif user_signed_in? %>
-<%# <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
 <%= link_to "マイページ", my_page_path %>
 <%= link_to "ユーザー情報編集", edit_user_registration_path %>
 <%= link_to '投稿', new_article_path %>
+<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
 <%# <%= link_to "新規登録", new_user_registration_path %>
 <%# <%= link_to "ログイン", new_user_session_path %>
 <% end %>
@@ -26,7 +27,7 @@
   </tr>
 <% @articles.each do |article| %>
   <tr>
-    <td><%= article.user %></td>
+    <td><%= article.user.name %></td>
     <td><%= article.title %></td>
     <td><%= article.content %></td>
     <td><%= image_tag article.image.url unless article.image.blank? %></td>
