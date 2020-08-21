@@ -1,7 +1,12 @@
-<h2>Sign up</h2>
+<h2>サインアップ</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+   <%= f.label :name%><br />
+   <%= f.text_field :name, autofocus: true  %>
+  </div>
 
   <div class="field">
     <%= f.label :email %><br />
@@ -11,7 +16,7 @@
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <ja>(<%= @minimum_password_length %> 文字以上入力して下さい)</ja>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
@@ -22,12 +27,12 @@
   </div>
 
   <div class="field">
-  <%= f.label :image %>
+  <%= f.label :'画像' %>
   <%= f.file_field :image %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "送信" %>
   </div>
 <% end %>
 
