@@ -1,8 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  mount_uploader :image, ImageUploader
-
+  mount_uploader :profile_image, ImageUploader
 
   validates :email, presence: true, uniqueness: true, length: { maximum: 255 },
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
@@ -14,4 +13,6 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  has_one_attached :profile_image
 end

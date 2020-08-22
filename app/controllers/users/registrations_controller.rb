@@ -2,11 +2,25 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+  before_action :configure_account_update_params, only: [:update]
   def my_page
     # @user = User.find(params[:id])
     @user = current_user
   end
+
+  # def profile_update
+  #   current_user.assign_attributes(account_update_params)
+  #   if current_user.save
+  #     redirect_to my_page_path(id: current_user.id), notice: 'プロフィールを更新しました'
+  #   else
+  #     redirect_to my_page_path(id: current_user.id), flash: { error: current_user.errors.full_messages }
+  #   end
+  # end
+
+  def after_update_path_for(resource)
+    my_page_path(id: current_user.id)
+  end
+
   # GET /resource/sign_up
   # def new
   #   super
@@ -24,7 +38,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   # def update
-  #   super
+  #   my_page_path(id: current_user.id)
   # end
 
   # DELETE /resource
@@ -49,9 +63,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: [:attribute, :name, :profile_image, :image, :receive])
+  end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)

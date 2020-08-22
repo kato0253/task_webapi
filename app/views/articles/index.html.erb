@@ -1,13 +1,11 @@
 <% if user_signed_in? && current_user.try(:admin?) %>
-<%= link_to "マイページ", my_page_path %>
-<%= link_to "ユーザー情報編集", edit_user_registration_path %>
 <%= link_to '投稿', new_article_path %>
+<%= link_to "マイページ", my_page_path %>
 <%= link_to "管理者画面", rails_admin_path %>
 <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
 <% elsif user_signed_in? %>
-<%= link_to "マイページ", my_page_path %>
-<%= link_to "ユーザー情報編集", edit_user_registration_path %>
 <%= link_to '投稿', new_article_path %>
+<%= link_to "マイページ", my_page_path %>
 <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
 <%# <%= link_to "新規登録", new_user_registration_path %>
 <%# <%= link_to "ログイン", new_user_session_path %>
@@ -30,7 +28,7 @@
     <td><%= article.user.name %></td>
     <td><%= article.title %></td>
     <td><%= article.content %></td>
-    <td><%= image_tag article.image.url unless article.image.blank? %></td>
+    <td><%= image_tag article.image unless article.image.blank? %></td>
     <td><%= article.comments.size %></td>
     <td><%= link_to '詳細を確認する', article_path(article.id) %></td>
     <td><%= link_to "投稿を編集する", edit_article_path(article.id) %></td>
