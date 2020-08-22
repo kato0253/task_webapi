@@ -28,11 +28,11 @@
     <td><%= article.user.name %></td>
     <td><%= article.title %></td>
     <td><%= article.content %></td>
-    <td><%= image_tag article.image unless article.image.blank? %></td>
+    <td><%= image_tag article.image.url unless article.image.blank? %></td>
     <td><%= article.comments.size %></td>
-    <td><%= link_to '詳細を確認する', article_path(article.id) %></td>
-    <td><%= link_to "投稿を編集する", edit_article_path(article.id) %></td>
-    <td><%= link_to '投稿を削除する', article_path(article.id), method: :delete %></td>
+    <td><%= link_to '詳細確認', article_path(article.id) %></td>
+    <td><%= link_to "投稿編集", edit_article_path(article.id) %></td>
+    <td><%= link_to '投稿削除', article_path(article.id), method: :delete %></td>
   </tr>
 <% end %>
 </table>

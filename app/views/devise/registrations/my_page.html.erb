@@ -3,4 +3,4 @@
 <h3><%=@user.name %></h3>
 <h3><%= @user.email %></h3>
 
-<%= image_tag @user.profile_image unless @user.profile_image.blank?%>
+<%= image_tag @user.profile_image.variant(resize:'300x300').processed unless @user.profile_image.blank?%>
