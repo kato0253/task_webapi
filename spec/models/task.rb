@@ -8,7 +8,7 @@ RSpec.describe 'バリデーション管理', type: :model do
     article = Article.new(title: '失敗', content: '')
     expect(article).not_to be_valid
   end
-  it 'titleとcontentに内容が記載されていなければバリデーション' do
+  it 'titleとcontentに内容が記載無しなら、バリデーション' do
     article = Article.new(title: '', content: '')
     expect(article).not_to be_valid
   end
