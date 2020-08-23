@@ -10,7 +10,7 @@
 <p>タイトル: <%= @article.title %></p>
 <p>内容: <%= @article.content %></p>
 <p>画像:<%= image_tag @article.image.url , :size => '100x100' unless @article.image.blank? %></p>
-<p>コメント数: <%= @article.comments.size %></p>
+<p>コメント数: <%= @article.comments.count %></p>
 <p>コメント一覧</p>
 <div id="comments_area">
   <%= render partial: 'comments/index', locals: { comments: @comments, article: @article } %>
