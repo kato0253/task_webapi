@@ -15,26 +15,40 @@
 <% else %>
   <h1>投稿一覧</h1>
 <% end %>
-<table>
-  <tr>
-    <th>投稿者</th>
-    <th>タイトル</th>
-    <th>内容</th>
-    <th>画像</th>
-    <th>コメント数</th>
-  </tr>
-<% @articles.each do |article| %>
-  <tr>
-    <td><%= article.user.name %></td>
-    <td><%= article.title %></td>
-    <td><%= article.content %></td>
-    <td><%= image_tag article.image.url unless article.image.blank? %></td>
-    <td><%= article.comments.size %></td>
-    <td><%= link_to '詳細確認', article_path(article.id) %></td>
-    <td><%= link_to "投稿編集", edit_article_path(article.id) %></td>
-    <td><%= link_to '投稿削除', article_path(article.id), method: :delete %></td>
-  </tr>
+
+<%= search_form_for @q do |f| %>
+  <%= f.label :title_or_content, "検索ワード" %>
+  <%= f.search_field :title_or_content_cont %>
+  <%= f.submit "検索" %>
 <% end %>
+
+<%# <!-- <td><%= article.comments.size %></td>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">投稿者</th>
+      <th scope="col">タイトル</th>
+      <th scope="col">内容</th>
+      <th scope="col">画像</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+    <tr>
+      <td><%= article.user.name %></td>
+      <td><%= article.title %></td>
+      <td><%= article.content %></td>
+      <td><%= image_tag article.image.url unless article.image.blank? %></td>
+      <td><button type="button" class="btn btn-default"><%= link_to '詳細', article_path(article.id) %></button></td>
+      <td><button type="button" class="btn btn-default"><%= link_to "編集", edit_article_path(article.id) %></button></td>
+      <td><button type="button" class="btn btn-default"><%= link_to '削除', article_path(article.id), method: :delete %></button></td>
+    </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <div class="pages">

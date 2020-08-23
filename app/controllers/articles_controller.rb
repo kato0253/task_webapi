@@ -2,7 +2,9 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
 
   def index
-    @articles = Article.all.page(params[:page]).per(2)
+    @articles = Article.all.page(params[:page]).per(4)
+    @q = Article.ransack(params[:q])
+    @articles = @q.result(distinct: true).page(params[:page]).per(4)
   end
 
   def new
