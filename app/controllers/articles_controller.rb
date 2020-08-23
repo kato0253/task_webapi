@@ -51,12 +51,9 @@ class ArticlesController < ApplicationController
   def destroy
     @article = Article.find(params[:id])
     @article.destroy
-    respond_to do |format|
-      flash.now[:notice] = 'コメントが削除されました'
-      format.all
-      format.js { render :index }
-    end
+    redirect_to articles_path, alert: ('コメントが削除されました')
   end
+
 
   def confirm
     @article = Article.new(article_params)
